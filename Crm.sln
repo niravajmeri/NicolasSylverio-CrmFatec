@@ -1,11 +1,14 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.28516.95
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.168
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{6FF94467-B4B8-4AEB-9C07-47DB0A49E77D}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Itens", "Solution Itens", "{B0E2F549-A5E8-4ADB-AF37-FB976F430428}"
+	ProjectSection(SolutionItems) = preProject
+		.travis.yml = .travis.yml
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "0-Presentation", "0-Presentation", "{DDF2067D-D887-416B-8611-C87AFA36576F}"
 EndProject
@@ -29,8 +32,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Crm.Domain", "src\3-Domain\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Crm.Infra.Data", "src\4-Infra\4.1-Data\Crm.Infra.Data\Crm.Infra.Data.csproj", "{CABF5604-D7D5-49D5-867D-55B178A09974}"
 EndProject
-Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "Crm.DataBase", "src\4-Infra\4.1-Data\Crm.DataBase\Crm.DataBase.sqlproj", "{3180593D-CDD6-4206-A56F-EF05EB2B63E7}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -53,12 +54,6 @@ Global
 		{CABF5604-D7D5-49D5-867D-55B178A09974}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CABF5604-D7D5-49D5-867D-55B178A09974}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CABF5604-D7D5-49D5-867D-55B178A09974}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3180593D-CDD6-4206-A56F-EF05EB2B63E7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3180593D-CDD6-4206-A56F-EF05EB2B63E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3180593D-CDD6-4206-A56F-EF05EB2B63E7}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
-		{3180593D-CDD6-4206-A56F-EF05EB2B63E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3180593D-CDD6-4206-A56F-EF05EB2B63E7}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3180593D-CDD6-4206-A56F-EF05EB2B63E7}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -75,7 +70,6 @@ Global
 		{2B9738F9-A933-4F23-B26F-38969FE0BAE8} = {EFD6298D-26CA-47DB-A4B4-5EAADF2B3DD3}
 		{195EB4B4-A7A1-48FD-9B85-34D6D4AE3209} = {DEC44DBF-E031-4BC2-B2B5-FFFD90D12737}
 		{CABF5604-D7D5-49D5-867D-55B178A09974} = {7DB02E58-E092-480E-9C7D-820052B09315}
-		{3180593D-CDD6-4206-A56F-EF05EB2B63E7} = {7DB02E58-E092-480E-9C7D-820052B09315}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {92856095-264F-4672-BDE6-589222F66E5E}
