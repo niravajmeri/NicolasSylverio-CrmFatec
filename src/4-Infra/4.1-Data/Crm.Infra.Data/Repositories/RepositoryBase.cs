@@ -1,5 +1,4 @@
-﻿using Crm.Domain.Interfaces;
-using Crm.Infra.Data.Contexto;
+﻿using Crm.Infra.Data.Contexto;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
