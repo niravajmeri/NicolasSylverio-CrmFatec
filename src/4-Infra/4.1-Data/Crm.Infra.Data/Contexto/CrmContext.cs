@@ -33,21 +33,18 @@ namespace Crm.Infra.Data.Contexto
                 .Configure(x => x.HasMaxLength(100));
 
             base.OnModelCreating(modelBuilder);
-
-            // Para adicionar nova tabela por migrations usar classes de configurações para manter os campos corretamente modelados.
-            //modelBuilder.Configurations.Add(new UsuarioConfiguration());
         }
 
         public override int SaveChanges()
         {
             foreach (var entry in ChangeTracker.Entries().Where(entry => entry.Entity.GetType().GetProperty("DataCadastro") != null))
             {
-                if(entry.State == EntityState.Added)
+                if (entry.State == EntityState.Added)
                 {
                     entry.Property("DataCadastro").CurrentValue = DateTime.Now;
                 }
 
-                if(entry.State == EntityState.Modified)
+                if (entry.State == EntityState.Modified)
                 {
                     entry.Property("DataCadastro").IsModified = false;
                 }

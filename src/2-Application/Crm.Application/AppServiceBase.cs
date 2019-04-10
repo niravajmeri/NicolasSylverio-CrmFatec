@@ -8,9 +8,9 @@ namespace Crm.Application
     {
         private readonly IAppServiceBase<TEntity> _serviceBase;
 
-        public AppServiceBase(IAppServiceBase<TEntity> ServiceBase)
+        public AppServiceBase(IAppServiceBase<TEntity> serviceBase)
         {
-            _serviceBase = ServiceBase;
+            _serviceBase = serviceBase;
         }
 
         public void Add(TEntity obj)

@@ -1,9 +1,9 @@
-﻿using Crm.Infra.Data.Contexto;
+﻿using Crm.Domain.Interfaces.Repositories;
+using Crm.Infra.Data.Contexto;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using Crm.Domain.Interfaces.Repositories;
 
 namespace Crm.Infra.Data.Repositories
 {
@@ -19,7 +19,8 @@ namespace Crm.Infra.Data.Repositories
 
         public void Dispose()
         {
-            Dispose();
+            Dispose(true);
+            GC.SuppressFinalize(this);
         }
 
         public IEnumerable<TEntity> GetAll()
@@ -41,6 +42,11 @@ namespace Crm.Infra.Data.Repositories
         public void Update(TEntity obj)
         {
             Db.Entry(obj).State = EntityState.Modified;
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+
         }
     }
 }
