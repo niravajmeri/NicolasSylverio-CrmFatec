@@ -17,16 +17,13 @@
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
 <body>
-    <main role="main" class="">
-        <partial name="_header" />
-    </main>
 
-    <div class="container">
+    <partial name="_header" />
+
+    <main role="main">
         <partial name="_CookieConsentPartial" />
-        <main role="main" class="">
-            @RenderBody()
-        </main>
-    </div>
+        @RenderBody()
+    </main>
 
     <partial name="_footer" />
 
