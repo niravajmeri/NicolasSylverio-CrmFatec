@@ -5,19 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Mvc</title>
 
-    <environment include="Development">
-        <link rel="stylesheet" href="~/lib/materialize/css/materialize.min.css" />
-        <link rel="stylesheet" href="~/css/site.css" />
-    </environment>
-    <environment exclude="Development">
-        <link rel="stylesheet" href="~/lib/materialize/css/materialize.min.css"
-              asp-fallback-href="~/lib/materialize/css/materialize.min.css"
-              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute">
-    </environment>
+    <link rel="stylesheet" href="~/lib/materialize/css/materialize.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
 <body>
-
     <partial name="_header" />
 
     <main role="main">
@@ -26,21 +17,12 @@
     </main>
 
     <partial name="_footer" />
-
-    <environment include="Development">
-        <script src="~/lib/materialize/css/materialize.min.css"></script>
-        <script src="~/lib/materialize/js/materialize.min.js"></script>
-    </environment>
-    <environment exclude="Development">
-        <script src="~/lib/materialize/js/materialize.min.js"
-                asp-fallback-src="~/lib/jquery/dist/jquery.min.js">
-        </script>
-        <script src="~/lib/materialize/js/materialize.min.js"
-                asp-fallback-src="~/lib/materialize/js/materialize.min.js">
-        </script>
-    </environment>
-    <script src="~/js/site.js" asp-append-version="true"></script>
+    
+    <script src="~/lib/materialize/js/materialize.min.js"></script>
+    <script src="~/js/site.js"></script>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
 
     @RenderSection("Scripts", required: false)
+
 </body>
 </html>

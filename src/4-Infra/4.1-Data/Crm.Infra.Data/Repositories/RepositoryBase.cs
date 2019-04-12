@@ -19,7 +19,7 @@ namespace Crm.Infra.Data.Repositories
 
         public void Dispose()
         {
-            Dispose(true);
+            Db.Dispose();
             GC.SuppressFinalize(this);
         }
 
@@ -42,11 +42,6 @@ namespace Crm.Infra.Data.Repositories
         public void Update(TEntity obj)
         {
             Db.Entry(obj).State = EntityState.Modified;
-        }
-
-        protected virtual void Dispose(bool disposing)
-        {
-
         }
     }
 }

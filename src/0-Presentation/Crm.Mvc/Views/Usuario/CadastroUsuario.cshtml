@@ -1,0 +1,51 @@
+﻿<div class="container">
+    <div>
+        <h3>Cadastro de Usuario</h3>
+    </div>
+
+    <div class="row">
+        <form class="col s12">
+            <div class="row">
+                <div class="input-field col s12 m12 l6 xl6">
+                    <input id="nome" type="text" class="validate" data-length="50">
+                    <label for="nome">Nome</label>
+                </div>
+                <div class="input-field col s12 m12 l6 xl6">
+                    <input id="sobrenome" type="text" class="validate" data-length="50">
+                    <label for="sobrenome">Sobrenome</label>
+                </div>
+                <div class="input-field col s12 m12 l6 xl6">
+                    <input id="cpf" type="text" class="validate" data-length="11">
+                    <label for="cpf">Cpf</label>
+                </div>
+                <div class="input-field col s12 m12 l6 xl6">
+                    <input id="data_nascimento" type="text" class="validate" data-length="10">
+                    <label for="data_nascimento">Data Nascimento</label>
+                </div>
+                <div class="input-field col s12 m12 l6 xl6">
+                    <input id="login" type="text" class="validate" data-length="16">
+                    <label for="login">Login</label>
+                </div>
+                <div class="input-field col s12 m12 l6 xl6">
+                    <input id="password" type="password" class="validate" data-length="16">
+                    <label for="password">Password</label>
+                </div>
+                <div class="input-field col col s12 m12 l12 xl12">
+                    <input id="email" type="email" class="validate" data-length="100">
+                    <label for="email">Email</label>
+                    <span class="helper-text" data-error="E-mail invalido" data-success="Email Valido"></span>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts
+{
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const textNeedCount = document.querySelectorAll('#nome, #sobrenome, #cpf, #data_nascimento, #login, #password, #email');
+            M.CharacterCounter.init(textNeedCount);
+        });
+    </script>
+}
