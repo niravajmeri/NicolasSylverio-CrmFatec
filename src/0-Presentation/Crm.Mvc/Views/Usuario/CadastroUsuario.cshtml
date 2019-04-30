@@ -1,39 +1,98 @@
-﻿<div class="container">
+﻿@model Crm.Application.ViewModels.UsuarioViewModel
+
+<div class="container">
     <div>
         <h3>Cadastro de Usuario</h3>
     </div>
 
     <div class="row">
-        <form class="col s12">
-            <div class="row">
-                <div class="input-field col s12 m12 l6 xl6">
-                    <input id="nome" type="text" class="validate" data-length="50">
-                    <label for="nome">Nome</label>
+        <form method="post" class="col s12">
+            <div>
+                <div class="input-field col s12 m6 l6 xl6">
+                    <i class="material-icons prefix">contacts</i>
+                    <input asp-for="Nome" id="Nome" type="text" class="validate" data-length="50" />
+                    <label asp-for="Nome">Nome</label>
+                    <span asp-validation-for="Nome" class="helper-text" data-error="wrong"></span>
                 </div>
-                <div class="input-field col s12 m12 l6 xl6">
-                    <input id="sobrenome" type="text" class="validate" data-length="50">
-                    <label for="sobrenome">Sobrenome</label>
+
+                <div class="input-field col s12 m6 l6 xl6">
+                    <i class="material-icons prefix">contacts</i>
+                    <input asp-for="Sobrenome" id="Sobrenome" type="text" class="validate" min="3" data-length="50" />
+                    <label asp-for="Sobrenome"></label>
+                    <span asp-validation-for="Sobrenome" class="helper-text" data-error="wrong"></span>
                 </div>
-                <div class="input-field col s12 m12 l6 xl6">
-                    <input id="cpf" type="text" class="validate" data-length="11">
-                    <label for="cpf">Cpf</label>
+
+                <div class="input-field col s12 m6 l6 xl6">
+                    <i class="material-icons prefix">assignment_ind</i>
+                    <input asp-for="Cpf" id="Cpf" type="text" class="validate" data-length="11" />
+                    <label asp-for="Cpf"></label>
+                    <span asp-validation-for="Cpf" class="helper-text" data-error="wrong"></span>
                 </div>
-                <div class="input-field col s12 m12 l6 xl6">
-                    <input id="data_nascimento" type="text" class="validate" data-length="10">
-                    <label for="data_nascimento">Data Nascimento</label>
+
+                <div class="input-field col s12 m6 l6 xl6">
+                    <i class="material-icons prefix">event</i>
+                    <input asp-for="DataNascimento" id="DataNascimento" type="date" class="" data-length="10" />
+                    <label asp-for="DataNascimento"></label>
+                    <span asp-validation-for="DataNascimento" class="helper-text" data-error="wrong"></span>
                 </div>
-                <div class="input-field col s12 m12 l6 xl6">
-                    <input id="login" type="text" class="validate" data-length="16">
-                    <label for="login">Login</label>
+
+                <div class="input-field col s12 m6 l6 xl6">
+                    <i class="material-icons prefix">account_circle</i>
+                    <input asp-for="Login" id="Login" type="text" class="validate" data-length="20" />
+                    <label asp-for="Login"></label>
+                    <span asp-validation-for="Login" class="helper-text" data-error="wrong"></span>
                 </div>
-                <div class="input-field col s12 m12 l6 xl6">
-                    <input id="password" type="password" class="validate" data-length="16">
-                    <label for="password">Password</label>
+
+                <div class="input-field col s12 m6 l6 xl6">
+                    <i class="material-icons prefix">lock_open</i>
+                    <input asp-for="Senha" id="Senha" type="password" class="validate" data-length="20" />
+                    <label asp-for="Senha"></label>
+                    <span asp-validation-for="Senha" class="helper-text" data-error="wrong"></span>
                 </div>
-                <div class="input-field col col s12 m12 l12 xl12">
-                    <input id="email" type="email" class="validate" data-length="100">
-                    <label for="email">Email</label>
-                    <span class="helper-text" data-error="E-mail invalido" data-success="Email Valido"></span>
+
+                <div class="input-field col s12 m4 l4 xl4">
+                    <i class="material-icons prefix">phone</i>
+                    <input asp-for="Celular" id="Celular" type="number" class="validate" data-length="9" />
+                    <label asp-for="Celular"></label>
+                    <span asp-validation-for="Celular" class="helper-text" data-error="wrong"></span>
+                </div>
+
+                <div class="input-field col s12 m4 l4 xl4">
+                    <select asp-for="Sexo">
+                        <option value="" disabled selected>Selecione uma opção</option>
+                        <option value="0">Feminino</option>
+                        <option value="1">Masculino</option>
+                        <option value="2">Outros</option>
+                    </select>
+                    <label asp-for="Sexo"></label>
+                    <br />
+                    <br />
+                </div>
+
+                <div class="input-field col s12 m4 l4 xl4">
+                    <select asp-for="TipoUsuario">
+                        <option value="" disabled selected>Selecione uma opção</option>
+                        <option value="0">Supervisor</option>
+                        <option value="1">Funcionario</option>
+                        <option value="2">Aluno</option>
+                        <option value="3">Visitante</option>
+                    </select>
+                    <label asp-for="TipoUsuario"></label>
+                    <span asp-validation-for="TipoUsuario" class="helper-text" data-error="wrong"></span>
+                </div>
+
+                <div class="input-field col s12 m12 l12 xl12">
+                    <i class="material-icons prefix">contact_mail</i>
+                    <input asp-for="Email" id="Email" type="email" class="validate" data-length="100" />
+                    <label asp-for="Email"></label>
+                    <span asp-validation-for="Email" class="helper-text" data-error="E-mail invalido" data-success="Email Valido"></span>
+                </div>
+
+                <div class="input-field col s12 m12 l12 xl12">
+                    <div class="center">
+                        <button type="submit" title="Cadastrar" asp-action="CadastroUsuario" method="post" class="btn teal lighten-2">Cadastrar</button>
+                        <a asp-action="CadastroUsuario" method="get" class="btn amber lighten-2">Limpar</a>
+                    </div>
                 </div>
             </div>
         </form>
@@ -41,10 +100,15 @@
 </div>
 
 @section Scripts
-{
-    <script>
+    {
+    <script type="text/javascript">
+
         document.addEventListener('DOMContentLoaded', function () {
-            const textNeedCount = document.querySelectorAll('#nome, #sobrenome, #cpf, #data_nascimento, #login, #password, #email');
+            const elems = document.querySelectorAll('select');
+            const textNeedCount = document.querySelectorAll('#Nome, #Sobrenome, #DataNascimento, #Cpf, #Login, #Celular, #Senha, #Email');
+            const options = {};
+
+            M.FormSelect.init(elems, options);
             M.CharacterCounter.init(textNeedCount);
         });
     </script>

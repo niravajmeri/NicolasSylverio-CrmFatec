@@ -1,0 +1,38 @@
+﻿<ul class="sidenav" id="slide_login">
+    <li>
+        <div class="user-view">
+            <div class="background">
+                <img src="~/imagens/fundoPadrao.png" alt="Imagem Fundo">
+            </div>
+            <a href="#">
+                <img class="circle" src="~/imagens/avatarPadrao.png" alt="Avatar">
+            </a>
+            <a href="#">
+                <span class="black-text name">Nicolas Sylverio Pereira</span>
+            </a>
+            <a href="#">
+                <span class="black-text email">nicolas@hotmail.com</span>
+            </a>
+        </div>
+    </li>
+    <li>
+        <a><i class="material-icons left">notifications</i>Notificações</a>
+    </li>
+    <li><div class="divider"></div></li>
+    <li>
+        <a><i class="material-icons">message</i> Mensagens</a>
+    </li>
+    <li><div class="divider"></div></li>
+</ul>
+
+
+<script language="javascript">
+
+    document.addEventListener('DOMContentLoaded', function () {
+        const loginOptions = { edge: 'right' };
+
+        const login = document.querySelectorAll('#slide_login');
+        M.Sidenav.init(login, loginOptions);
+    });
+
+</script>

@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html>
+<html lang="pt-BR">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -7,22 +7,28 @@
 
     <link rel="stylesheet" href="~/lib/materialize/css/materialize.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
-    <partial name="_header" />
+    <partial name="_menu" />
 
     <main role="main">
-        <partial name="_CookieConsentPartial" />
-        @RenderBody()
+
+        <div class="row">
+            <div>
+                <partial name="_CookieConsentPartial" />
+                @RenderBody()
+            </div>
+        </div>
     </main>
 
     <partial name="_footer" />
-    
+
     <script src="~/lib/materialize/js/materialize.min.js"></script>
     <script src="~/js/site.js"></script>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
 
-    @RenderSection("Scripts", required: false)
+    @RenderSection("Scripts", false)
 
 </body>
 </html>

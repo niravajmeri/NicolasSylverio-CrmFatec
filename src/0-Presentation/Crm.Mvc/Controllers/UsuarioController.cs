@@ -1,17 +1,67 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Crm.Application.Interface;
+using Crm.Application.ViewModels;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Collections.Generic;
 
 namespace Crm.Mvc.Controllers
 {
     public class UsuarioController : Controller
     {
-        public IActionResult Index()
+        private readonly IUsuarioAppService _usuarioAppService;
+
+        public UsuarioController(IUsuarioAppService usuarioAppService)
         {
-            return View();
+            _usuarioAppService = usuarioAppService;
         }
 
+        [HttpGet]
+        [AllowAnonymous]
+        public IActionResult Index()
+        {
+            try
+            {
+                var listaUsuario = _usuarioAppService.GetAllUsuarioViewModel();
+
+                return View(listaUsuario);
+            }
+            catch (Exception)
+            {
+                return View(new List<UsuarioViewModel>());
+            }
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
         public IActionResult CadastroUsuario()
         {
-            return View();
+            try
+            {
+                return View();
+            }
+            catch (Exception)
+            {
+                return View();
+            }
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult CadastroUsuario(UsuarioViewModel usuarioViewModel)
+        {
+            try
+            {
+                if (!ModelState.IsValid) return View(usuarioViewModel);
+
+                _usuarioAppService.Cadastrar(usuarioViewModel);
+
+                return View(new UsuarioViewModel());
+            }
+            catch (Exception)
+            {
+                return View(usuarioViewModel);
+            }
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Crm.Domain.Entities;
+﻿using Crm.Domain.Models;
+using Crm.Domain.Models.Usuarios;
 
 namespace Crm.Domain.Interfaces.Repositories
 {

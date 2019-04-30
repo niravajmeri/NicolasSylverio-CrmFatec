@@ -53,3 +53,15 @@ body {
 main {
     flex: 1 0 auto;
 }
+
+/* Cores Padrão
+------------------------------------------------ */
+
+.primary-color {
+    background-color: #ee6e73;
+}
+
+.secondary-color {
+    background-color: #ffffff;
+}
+

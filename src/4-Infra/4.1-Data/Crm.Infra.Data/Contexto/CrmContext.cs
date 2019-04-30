@@ -1,36 +1,26 @@
-﻿using Crm.Domain.Entities;
+﻿using Crm.Domain.Models.Usuarios;
+using Crm.Infra.Data.Mappings;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using System;
-using System.Data.Entity;
-using System.Data.Entity.ModelConfiguration.Conventions;
+using System.IO;
 using System.Linq;
 
 namespace Crm.Infra.Data.Contexto
 {
     public class CrmContext : DbContext
     {
-        public CrmContext()
-            : base("CrmConnection")
+        public CrmContext(DbContextOptions options)
+             : base(options)
         {
 
         }
 
         public DbSet<Usuario> Usuarios { get; set; }
 
-        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
-            modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
-            modelBuilder.Conventions.Remove<ManyToManyCascadeDeleteConvention>();
-
-            modelBuilder.Properties()
-                .Where(x => x.Name == x.ReflectedType.Name + "Id")
-                .Configure(x => x.IsKey());
-
-            modelBuilder.Properties<string>()
-                .Configure(x => x.HasColumnType("varchar"));
-
-            modelBuilder.Properties<string>()
-                .Configure(x => x.HasMaxLength(100));
+            modelBuilder.ApplyConfiguration(new UsuarioMap());
 
             base.OnModelCreating(modelBuilder);
         }
@@ -51,6 +41,18 @@ namespace Crm.Infra.Data.Contexto
             }
 
             return base.SaveChanges();
+        }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            var configuration = new ConfigurationBuilder()
+               .SetBasePath(Directory.GetCurrentDirectory())
+               .AddJsonFile("appsettings.json")
+               .Build();
+
+            var connectionString = configuration.GetConnectionString("CrmConnection");
+
+            optionsBuilder.UseSqlServer(connectionString);
         }
     }
 }

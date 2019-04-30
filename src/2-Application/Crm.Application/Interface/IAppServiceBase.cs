@@ -10,6 +10,5 @@ namespace Crm.Application.Interface
         IEnumerable<TEntity> GetAll();
         void Update(TEntity obj);
         void Remove(TEntity obj);
-        void Dispose();
     }
 }

@@ -1,0 +1,162 @@
+﻿<style>
+
+    #logo-container {
+        height: 57px;
+        margin-bottom: 32px;
+    }
+
+    li.logo {
+        text-align: center;
+        margin-top: 32px;
+        margin-bottom: 70px;
+    }
+
+    #front-page-logo {
+        display: inline-block;
+        height: 100%;
+        pointer-events: none;
+    }
+
+    #slide_menu li.version {
+        position: absolute;
+        top: 100px;
+        left: 0;
+        right: 0;
+        font-family: "Inconsolata";
+        text-align: center;
+    }
+
+    .sidenav .collapsible {
+        margin: 0;
+    }
+
+    ul.sidenav.sidenav-fixed ul.collapsible-accordion {
+        background-color: #FFF;
+    }
+
+    .sidenav .collapsible, .sidenav.fixed .collapsible {
+        border: none;
+        -webkit-box-shadow: none;
+        box-shadow: none;
+    }
+
+    .no-padding {
+        padding: 0 !important;
+    }
+</style>
+
+<nav>
+    <div class="nav-wrapper">
+        <div class="container">
+            <a class="brand-logo" asp-area="" asp-controller="Home" asp-action="Index">Mvc</a>
+            <a href="#" class="sidenav-trigger" data-target="slide_menu"><i class="material-icons left">menu</i></a>
+            <a href="#" class="sidenav-trigger right" data-target="slide_login"><i class="material-icons right">person</i></a>
+            <ul class="hide-on-med-and-down right">
+                <li>
+                    <a href="#" class="sidenav-trigger show-on-large" data-target="slide_menu"><i class="material-icons">menu</i></a>
+                </li>
+                <li>
+                    <a href="#" class="sidenav-trigger show-on-large" data-target="slide_login"><i class="material-icons left">person</i>Nome Usuario</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<ul class="sidenav" id="slide_menu">
+    <li class="logo">
+        <a id="logo-container" class="brand-logo" href="/">
+            <object id="front-page-logo" data="imagens/logoPadrao.png"></object>
+        </a>
+    </li>
+    <li class="version">
+        <a href="/">Mvc</a>
+    </li>
+    <li>
+        <div class="divider"></div>
+    </li>
+    <li>
+        <a asp-area="" asp-controller="Home" asp-action="Index" class="collapsible-header waves-effect waves-teal">Home<i class="material-icons">home</i></a>
+    </li>
+    <li>
+        <div class="divider"></div>
+    </li>
+    <li>
+        <a asp-area="" asp-controller="Home" asp-action="Privacy" class="collapsible-header waves-effect waves-teal">Privacidade<i class="material-icons">message</i></a>
+    </li>
+    <li>
+        <div class="divider"></div>
+    </li>
+    <li>
+        <ul class="collapsible collapsible-accordion">
+            <li>
+                <a class="collapsible-header waves-effect waves-teal">Usuario<i class="material-icons">arrow_drop_down</i></a>
+                <div class="collapsible-body">
+                    <ul>
+                        <li>
+                            <a asp-area="" asp-controller="Usuario" asp-action="Index" class="waves-effect waves-teal">Lista Usuarios<i class="material-icons">list</i></a>
+                        </li>
+                        <li>
+                            <a asp-area="" asp-controller="Usuario" asp-action="CadastroUsuario" class="waves-effect waves-teal">Cadastro Usuarios<i class="material-icons">list</i></a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+        </ul>
+    </li>
+    <li>
+        <div class="divider"></div>
+    </li>
+    <li>
+        <a asp-area="" asp-controller="Login" asp-action="Index" class="collapsible-header waves-effect waves-teal">Login<i class="material-icons">lock_open</i></a>
+    </li>
+    <li>
+        <div class="divider"></div>
+    </li>
+</ul>
+
+<ul class="sidenav" id="slide_login">
+    <li>
+        <div class="user-view">
+            <div class="background">
+                <img src="~/imagens/fundoPadrao.png" alt="Imagem Fundo">
+            </div>
+            <a href="#">
+                <img class="circle" src="~/imagens/avatarPadrao.png" alt="Avatar">
+            </a>
+            <a href="#">
+                <span class="black-text name">Nicolas Sylverio Pereira</span>
+            </a>
+            <a href="#">
+                <span class="black-text email">nicolas@hotmail.com</span>
+            </a>
+        </div>
+    </li>
+    <li>
+        <a class="waves-effect"><i class="material-icons left">notifications</i>Notificações</a>
+    </li>
+    <li><div class="divider"></div></li>
+    <li>
+        <a class="waves-effect"><i class="material-icons">message</i> Mensagens</a>
+    </li>
+    <li><div class="divider"></div></li>
+</ul>
+
+<script language="javascript">
+
+    document.addEventListener('DOMContentLoaded', function () {
+        const menuOptions = {};
+        const loginOptions = { edge: 'right' };
+        const collapsibleOptions = { inDuration: 50, outDuration: 50 };
+
+        const menu = document.querySelectorAll('#slide_menu');
+        M.Sidenav.init(menu, menuOptions);
+
+        const login = document.querySelectorAll('#slide_login');
+        M.Sidenav.init(login, loginOptions);
+
+        const elems = document.querySelectorAll('.collapsible');
+        M.Collapsible.init(elems, collapsibleOptions);
+    });
+
+</script>
