@@ -30,6 +30,7 @@ namespace Crm.Application.ViewModels
         [DisplayName("Login")]
         public string Login { get; set; }
 
+        [PasswordPropertyText]
         [Required(ErrorMessage = "O Campo Senha é Obrigatorio")]
         [DataType(DataType.Password)]
         [MaxLength(20, ErrorMessage = "O campo Senha deve ter no maximo 20 caracteres")]

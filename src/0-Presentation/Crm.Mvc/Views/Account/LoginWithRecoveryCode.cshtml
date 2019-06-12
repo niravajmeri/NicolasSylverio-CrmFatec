@@ -1,0 +1,26 @@
+﻿@using Crm.Application.ViewModels.AccountViewModels
+@model Crm.Application.ViewModels.AccountViewModels.LoginWithRecoveryCodeViewModel
+
+<h2>@ViewData["Title"]</h2>
+<hr />
+<p>
+    You have requested to login with a recovery code.
+</p>
+
+<div class="row">
+    <div class="col m6">
+        <form method="post">
+            <div asp-validation-summary="All" class=""></div>
+            <div class="">
+                <label asp-for="RecoveryCode"></label>
+                <input asp-for="RecoveryCode" class="" autocomplete="off" />
+                <span asp-validation-for="RecoveryCode" class=""></span>
+            </div>
+            <button type="submit" class="btn teal">Log in</button>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}

@@ -14,6 +14,13 @@
     <ProjectReference Include="..\..\..\2-Application\Crm.Application\Crm.Application.csproj" />
     <ProjectReference Include="..\..\..\3-Domain\Crm.Domain\Crm.Domain.csproj" />
     <ProjectReference Include="..\..\4.1-Data\Crm.Infra.Data\Crm.Infra.Data.csproj" />
+    <ProjectReference Include="..\Crm.Infra.CrossCutting.Identity\Crm.Infra.CrossCutting.Identity.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Microsoft.AspNetCore.Identity.UI">
+      <HintPath>..\..\..\..\..\..\..\..\..\Program Files\dotnet\sdk\NuGetFallbackFolder\microsoft.aspnetcore.identity.ui\2.2.0\lib\netstandard2.0\Microsoft.AspNetCore.Identity.UI.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>

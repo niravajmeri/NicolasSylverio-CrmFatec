@@ -1,7 +1,14 @@
-﻿using Crm.Infra.IoC;
+﻿using Crm.Infra.CrossCutting.Identity.Authorization;
+using Crm.Infra.CrossCutting.Identity.Data;
+using Crm.Infra.CrossCutting.Identity.Models;
+using Crm.Infra.IoC;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -14,16 +21,43 @@ namespace Crm.Mvc
             Configuration = configuration;
         }
 
-        public IConfiguration Configuration { get; }
+        private IConfiguration Configuration { get; }
 
-        public static void ConfigureServices(IServiceCollection services)
+        public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("AdicionarUsuario", policy => policy.Requirements.Add(new ClaimRequirement("Usuario", "Write")));
+                options.AddPolicy("RemoverUsuario", policy => policy.Requirements.Add(new ClaimRequirement("Usuario", "Remove")));
+            });
+
+            services.AddDbContext<ApplicationDbContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("CrmConnection")));
+
+            services.AddIdentity<ApplicationUser, IdentityRole>()
+                .AddEntityFrameworkStores<ApplicationDbContext>()
+                .AddDefaultTokenProviders();
+
+            services.Configure<CookiePolicyOptions>(options =>
+            {
+                // This lambda determines whether user consent for non-essential cookies is needed for a given request.
+                options.CheckConsentNeeded = context => true;
+                options.MinimumSameSitePolicy = SameSiteMode.None;
+            });
+
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie(o =>
+                {
+                    o.LoginPath = new PathString("/login");
+                    o.AccessDeniedPath = new PathString("/home/access-denied");
+                });
 
             RegisterServices(services);
         }
 
-        public static void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             if (env.IsDevelopment())
             {
@@ -50,7 +84,7 @@ namespace Crm.Mvc
 
         private static void RegisterServices(IServiceCollection services)
         {
-            NativeInjectorBootStrapper.ResgistrarServicos(services);
+            NativeInjectorBootStrapper.RegisterServices(services);
         }
     }
 }

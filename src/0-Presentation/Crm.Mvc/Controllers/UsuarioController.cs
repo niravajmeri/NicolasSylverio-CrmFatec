@@ -7,6 +7,7 @@ using System.Collections.Generic;
 
 namespace Crm.Mvc.Controllers
 {
+    [Authorize]
     public class UsuarioController : Controller
     {
         private readonly IUsuarioAppService _usuarioAppService;
@@ -34,6 +35,7 @@ namespace Crm.Mvc.Controllers
 
         [HttpGet]
         [AllowAnonymous]
+        [Authorize(Policy = "RemoverUsuario")]
         public IActionResult CadastroUsuario()
         {
             try
@@ -48,6 +50,7 @@ namespace Crm.Mvc.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Policy = "RemoverUsuario")]
         public IActionResult CadastroUsuario(UsuarioViewModel usuarioViewModel)
         {
             try

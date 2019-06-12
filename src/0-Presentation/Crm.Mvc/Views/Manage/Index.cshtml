@@ -1,0 +1,44 @@
+﻿@using Crm.Mvc.Views.Manage
+
+@model Crm.Application.ViewModels.ManageViewModels.IndexViewModel
+@{
+    ViewData["Title"] = "Profile";
+    ViewData.AddActivePage(ManageNavPages.Index);
+}
+
+
+@Html.Partial("_StatusMessage", Model.StatusMessage);
+
+<div class="row">
+    <div class="">
+        <form method="post">
+            <div asp-validation-summary="All" class=""></div>
+            <div class="">
+                <label asp-for="Username"></label>
+                <input asp-for="Username" class="" disabled />
+            </div>
+            <div class="">
+                <label asp-for="Email"></label>
+                @if (Model.IsEmailConfirmed)
+                {
+                    <div class="">
+                        <input asp-for="Email" class="" />
+                        <span class="" aria-hidden="true"><span class=""></span></span>
+                    </div>
+                }
+                else
+                {
+                    <input asp-for="Email" class="" />
+                    <button asp-action="SendVerificationEmail" class="btn">Send verification email</button>
+                }
+                <span asp-validation-for="Email" class=""></span>
+            </div>
+            <div class="">
+                <label asp-for="NumeroTelefone"></label>
+                <input asp-for="NumeroTelefone" class="" />
+                <span asp-validation-for="NumeroTelefone" class=""></span>
+            </div>
+            <button type="submit" class="btn">Save</button>
+        </form>
+    </div>
+</div>

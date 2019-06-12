@@ -1,0 +1,60 @@
+﻿@model Crm.Application.ViewModels.AccountViewModels.RegisterViewModel
+
+<div class="container">
+    <div class="row">
+        <div class="col hide-on-med-and-down l4 xl6 center">
+            <div class="row" style="padding-right: 30px;">
+                <div class="valign-wrapper">
+                    <div>
+                        <h3>Texto</h3>
+                        <blockquote>
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas sit amet tellus quis ex efficitur interdum. Nunc auctor justo ut ultrices aliquam.
+                                Maecenas tempor metus ligula, sit amet consequat arcu mollis quis. Donec facilisis massa ut dolor ultricies,
+                                ut posuere sapien commodo.
+                            </p>
+                        </blockquote>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col s12 m12 l8 xl6">
+            <form method="post">
+                <div>
+                    <div class="col s12 m12 l12 xl12 center">
+                        <h3>Registre-se</h3>
+                    </div>
+                    <div class="input-field col s12 m12 l12 xl12 center">
+                        <input asp-for="Email" id="Email" type="email" class="validate" data-length="100" />
+                        <label asp-for="Email"></label>
+                        <span asp-validation-for="Email" class="helper-text" data-error="E-mail invalido" data-success="Email Valido"></span>
+                    </div>
+
+                    <div class="input-field col s12 m12 l12 xl12 center">
+                        <input asp-for="Senha" id="Senha" type="password" class="validate" min="6" data-length="16" />
+                        <label asp-for="Senha"></label>
+                        <span asp-validation-for="Senha" class="helper-text"></span>
+                        <span class="helper-text">tenha certeza que sua senha contenha até 15 ou pelo menos 8 caracteres, incluindo numeros, letras minusculas e letras maiusculas.</span>
+                    </div>
+
+                    <div class="input-field col s12 m12 l12 xl12 center">
+                        <input asp-for="ConfirmarSenha" id="ConfirmarSenha" type="password" class="validate" min="6" data-length="16" />
+                        <label asp-for="ConfirmarSenha"></label>
+                        <span asp-validation-for="ConfirmarSenha" class="helper-text"></span>
+                    </div>
+
+                    <br />
+                    <br />
+
+                    <div class="col s12 m12 l12 xl12 center">
+                        <button type="submit" title="registrar" class="btn teal lighten-2 center waves-effect">Registrar</button>
+                    </div>
+
+                    <div class="col s12 m12 l12 xl12 center" style="padding: 15px 0 0 0">
+                        <span>Já tem uma conta? <a asp-action="Login" title="Login" class=""><b>Fazer Login</b></a></span>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -4,6 +4,8 @@ using Crm.Application.Services;
 using Crm.Domain.Interfaces.Repositories;
 using Crm.Domain.Interfaces.Services;
 using Crm.Domain.Services;
+using Crm.Infra.CrossCutting.Identity.Interfaces;
+using Crm.Infra.CrossCutting.Identity.Models;
 using Crm.Infra.Data.Contexto;
 using Crm.Infra.Data.Repositories;
 using Microsoft.AspNetCore.Http;
@@ -11,14 +13,9 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Crm.Infra.IoC
 {
-    public class NativeInjectorBootStrapper
+    public static class NativeInjectorBootStrapper
     {
-        public static void ResgistrarServicos(IServiceCollection services)
-        {
-            RegisterServices(services);
-        }
-
-        protected static void RegisterServices(IServiceCollection services)
+        public static void RegisterServices(IServiceCollection services)
         {
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
@@ -32,7 +29,11 @@ namespace Crm.Infra.IoC
             services.AddScoped<IUsuarioRepository, UsuarioRepository>();
 
             // Domain
-            services.AddScoped<ICriptografiaService, CriptografiaService>();
+            services.AddScoped<IUsuarioService, UsuarioService>();
+            services.AddTransient<IEmailService, EmailService>();
+
+            // Identity
+            services.AddScoped<IUser, AspNetUser>();
         }
     }
 }

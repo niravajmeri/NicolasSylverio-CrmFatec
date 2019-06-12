@@ -4,98 +4,98 @@
     ViewData["Title"] = "Usuarios";
 }
 
-    <div class="container">
+<div class="container">
 
-        <div>
-            <h2>@ViewData["Title"]</h2>
-        </div>
+    <div>
+        <h2>@ViewData["Title"]</h2>
+    </div>
 
-        <div class="row">
-            <div class="col-md-12">
-                <div>
-                    <div class="pull-left">
-                        <a asp-controller="Usuario" asp-action="CadastroUsuario" class="btn teal lighten-2">Cadastro Usuario</a>
-                        <span title="Cadastrar" class=""></span>
-                    </div>
+    <div class="row">
+        <div class="col m12">
+            <div>
+                <div class="left">
+                    <a asp-controller="Usuario" asp-action="CadastroUsuario" class="btn teal lighten-2">Cadastro Usuario</a>
+                    <span title="Cadastrar" class=""></span>
                 </div>
             </div>
         </div>
-        <br />
+    </div>
+    <br />
 
-        <table class="table responsive-table highlight">
-            <thead>
+    <table class="table responsive-table highlight">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Nome)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Sobrenome)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Email)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DataNascimento)
+                </th>
+                <th>
+
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
                 <tr>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Nome)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Sobrenome)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Email)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.DataNascimento)
-                    </th>
-                    <th>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Nome)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Sobrenome)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Email)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DataNascimento)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.Id" title="Editar" class="btn yellow lighten-2 waves-effect">
+                            <i class="material-icons">edit</i>
+                        </a>
 
-                    </th>
+                        <a asp-action="Details" asp-route-id="@item.Id" title="Detalhes" class="btn blue lighten-2 waves-effect">
+                            <i class="material-icons">details</i>
+                        </a>
+
+                        <a asp-action="Delete" asp-route-id="@item.Id" title="Deletar" class="btn red lighten-2 waves-effect">
+                            <i class="material-icons">delete</i>
+                        </a>
+
+                        <button type="button" class="btn purple lighten-2 waves-effect" title="Historico" data-id="@item.Id" data-toggle="modal">
+                            <i class="material-icons">history</i>
+                        </button>
+                    </td>
                 </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model)
-                {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Nome)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Sobrenome)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Email)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.DataNascimento)
-                        </td>
-                        <td>
-                            <a asp-action="Edit" asp-route-id="@item.Id" title="Editar" class="btn yellow waves-effect">
-                                <i class="material-icons">edit</i>
-                            </a>
+            }
+        </tbody>
+    </table>
 
-                            <a asp-action="Details" asp-route-id="@item.Id" title="Detalhes" class="btn blue waves-effect">
-                                <i class="material-icons">details</i>
-                            </a>
+    <br />
 
-                            <a asp-action="Delete" asp-route-id="@item.Id" title="Deletar" class="btn red waves-effect">
-                                <i class="material-icons">delete</i>
-                            </a>
-
-                            <button type="button" class="btn purple waves-effect" title="Historico" data-id="@item.Id" data-toggle="modal">
-                                <i class="material-icons">history</i>
-                            </button>
-                        </td>
-                    </tr>
-                }
-            </tbody>
-        </table>
-
-        <br />
-
-        <div class="row">
-            <div class="col s12 m12 l12 xl12 right-align">
-                <ul class="pagination">
-                    <li class="disabled"><a href="#"><i class="material-icons">chevron_left</i></a></li>
-                    <li class="active"><a href="#">1</a></li>
-                    <li class="waves-effect"><a href="#">2</a></li>
-                    <li class="waves-effect"><a href="#">3</a></li>
-                    <li class="waves-effect"><a href="#">4</a></li>
-                    <li class="waves-effect"><a href="#">5</a></li>
-                    <li class="waves-effect"><a href="#"><i class="material-icons">chevron_right</i></a></li>
-                </ul>
-            </div>
+    <div class="row">
+        <div class="col s12 m12 l12 xl12 right-align">
+            <ul class="pagination">
+                <li class="disabled"><a href="#"><i class="material-icons">chevron_left</i></a></li>
+                <li class="active"><a href="#">1</a></li>
+                <li class="waves-effect"><a href="#">2</a></li>
+                <li class="waves-effect"><a href="#">3</a></li>
+                <li class="waves-effect"><a href="#">4</a></li>
+                <li class="waves-effect"><a href="#">5</a></li>
+                <li class="waves-effect"><a href="#"><i class="material-icons">chevron_right</i></a></li>
+            </ul>
         </div>
-
+    </div>
+</div>
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         const elems = document.querySelectorAll('.modal');
