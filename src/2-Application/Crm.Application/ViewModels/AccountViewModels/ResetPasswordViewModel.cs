@@ -9,14 +9,14 @@ namespace Crm.Application.ViewModels.AccountViewModels
         public string Email { get; set; }
 
         [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
+        [StringLength(100, ErrorMessage = "O campo {0} precisa ter pelo menos {2} e no maximo {1} caracteres no maximo.", MinimumLength = 6)]
         [DataType(DataType.Password)]
-        public string Password { get; set; }
+        public string Senha { get; set; }
 
         [DataType(DataType.Password)]
-        [Display(Name = "Confirm password")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
-        public string ConfirmPassword { get; set; }
+        [Display(Name = "Confirme a Senha")]
+        [Compare("Senha", ErrorMessage = "A Senha especificada com a confirmação não batem")]
+        public string ConfirmarSenha { get; set; }
 
         public string Code { get; set; }
     }

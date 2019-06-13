@@ -5,3 +5,21 @@ CRM FATEC
 Projeto de conclusão de curso da fatec jundiai  2° Semestre 2019
 
 Curso: Gestão da Tecnologia da Informação 
+
+
+## Tecnologias Utilizadas
+- [ASP.NET Core 2.2 (with .NET Core 2.2)](https://docs.microsoft.com/pt-br/aspnet/core/release-notes/aspnetcore-2.2?view=aspnetcore-2.2)
+ - [ASP.NET MVC Core](https://docs.microsoft.com/pt-br/aspnet/core/mvc/overview?view=aspnetcore-2.2)
+ - [Entity Framework Core 2.2](https://docs.microsoft.com/pt-br/ef/core/)
+ - [Microsoft .Net Core Identity](https://docs.microsoft.com/pt-br/aspnet/core/security/authentication/identity?view=aspnetcore-2.2&tabs=visual-studio)
+- [AutoMapper](https://automapper.org/)
+- [Materialize](https://materializecss.com/)
+
+
+## Arquitetura
+- Domain Driven Design (Camadas e Padrão de Modelo de Domínio)
+- Arquitetura completa com preocupações de separação de responsabilidade, SOLID e Clean Code
+
+
+## About
+[MIT license](LICENSE).

@@ -94,7 +94,7 @@ namespace Crm.Mvc.Controllers
             var user = await _signInManager.GetTwoFactorAuthenticationUserAsync();
             if (user == null)
             {
-                throw new ApplicationException($"Unable to load two-factor authentication user.");
+                throw new ApplicationException("Unable to load two-factor authentication user.");
             }
 
             ViewData["ReturnUrl"] = returnUrl;
@@ -201,9 +201,29 @@ namespace Crm.Mvc.Controllers
 
         [HttpPost]
         [AllowAnonymous]
-        public IActionResult ForgotPassword(ForgetPasswordViewModel forgetPassword)
+        public async Task<IActionResult> ForgotPassword(ForgetPasswordViewModel forgetPassword)
         {
-            return !ModelState.IsValid ? View(forgetPassword) : View(nameof(ForgotPasswordSucess));
+            try
+            {
+                if (!ModelState.IsValid) return View(forgetPassword);
+
+                var user = await _userManager.FindByEmailAsync(forgetPassword.Email);
+                if (user == null || !await _userManager.IsEmailConfirmedAsync(user))
+                {
+                    // Don't reveal that the user does not exist or is not confirmed
+                    return RedirectToAction(nameof(ForgotPasswordSucess));
+                }
+
+                var code = await _userManager.GeneratePasswordResetTokenAsync(user);
+                var callbackUrl = Url.ResetPasswordCallbackLink(user.Id, code, Request.Scheme);
+                await _emailSender.SendEmailAsync(forgetPassword.Email, "Resetar Senha",
+                    $"Por Favor Resete Sua Senha Clicando Aqui: <a href='{callbackUrl}'>link</a>");
+                return RedirectToAction(nameof(ForgotPasswordSucess));
+            }
+            catch (Exception)
+            {
+                return View(forgetPassword);
+            }
         }
 
         [HttpGet]
@@ -260,7 +280,7 @@ namespace Crm.Mvc.Controllers
                 // Don't reveal that the user does not exist
                 return RedirectToAction(nameof(ResetPasswordConfirmation));
             }
-            var result = await _userManager.ResetPasswordAsync(user, model.Code, model.Password);
+            var result = await _userManager.ResetPasswordAsync(user, model.Code, model.Senha);
             if (result.Succeeded)
             {
                 return RedirectToAction(nameof(ResetPasswordConfirmation));
