@@ -12,26 +12,21 @@ namespace Crm.Application.Services
     public class UsuarioAppService : IUsuarioAppService
     {
         private readonly IUsuarioRepository _usuarioRepository;
-        private readonly ICriptografiaService _criptografiaService;
         private readonly IMapper _mapper;
 
         public UsuarioAppService
         (
             IUsuarioRepository usuarioRepository,
-            IMapper mapper,
-            ICriptografiaService criptografiaService
+            IMapper mapper
         )
         {
             _usuarioRepository = usuarioRepository;
             _mapper = mapper;
-            _criptografiaService = criptografiaService;
         }
 
         public void Cadastrar(UsuarioViewModel usuarioViewModel)
         {
             var usuario = _mapper.Map<Usuario>(usuarioViewModel);
-
-            usuario.Senha = _criptografiaService.CriptografarSenha(usuario.Senha, usuario.Email);
 
             _usuarioRepository.Add(usuario);
         }

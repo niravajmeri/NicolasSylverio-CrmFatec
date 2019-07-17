@@ -1,4 +1,6 @@
-﻿using Crm.Infra.CrossCutting.Identity.Authorization;
+﻿using Crm.Domain.Enum;
+using Crm.Domain.Models.Permission;
+using Crm.Infra.CrossCutting.Identity.Authorization;
 using Crm.Infra.CrossCutting.Identity.Data;
 using Crm.Infra.CrossCutting.Identity.Models;
 using Crm.Infra.IoC;
@@ -29,8 +31,10 @@ namespace Crm.Mvc
 
             services.AddAuthorization(options =>
             {
-                options.AddPolicy("AdicionarUsuario", policy => policy.Requirements.Add(new ClaimRequirement("Usuario", "Write")));
-                options.AddPolicy("RemoverUsuario", policy => policy.Requirements.Add(new ClaimRequirement("Usuario", "Remove")));
+                options.AddPolicy("VisualizarPermissao", policy => policy.Requirements.Add(new ClaimRequirement(CustomClaimTypes.Permissao, "View")));
+                options.AddPolicy("AdicionarPermissao", policy => policy.Requirements.Add(new ClaimRequirement(CustomClaimTypes.Permissao, "Add")));
+                options.AddPolicy("RemoverPermissao", policy => policy.Requirements.Add(new ClaimRequirement(CustomClaimTypes.Permissao, "Remove")));
+                options.AddPolicy("RemoverUsuario", policy => policy.Requirements.Add(new ClaimRequirement(CustomClaimTypes.Permissao, "teste")));
             });
 
             services.AddDbContext<ApplicationDbContext>(options =>

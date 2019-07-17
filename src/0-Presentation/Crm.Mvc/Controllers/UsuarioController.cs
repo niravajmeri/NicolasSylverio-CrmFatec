@@ -34,7 +34,6 @@ namespace Crm.Mvc.Controllers
         }
 
         [HttpGet]
-        [AllowAnonymous]
         [Authorize(Policy = "RemoverUsuario")]
         public IActionResult CadastroUsuario()
         {

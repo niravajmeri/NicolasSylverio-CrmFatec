@@ -1,0 +1,60 @@
+﻿@model IEnumerable<Crm.Application.ViewModels.PermissionViewModels.RoleViewModel>
+
+@{
+    ViewData["Title"] = "Lista de Grupos de Acesso";
+}
+
+<div class="container">
+    <h3>@ViewData["Title"]</h3>
+
+    <br />
+
+    <ul class="collapsible expandable">
+        @if (Model != null)
+        {
+            @foreach (var role in Model)
+            {
+                <li>
+                    <div class="collapsible-header">
+                        <span style="padding-top:5px">
+                            <i class="material-icons">lock_outline</i>
+                        </span>
+                        <span style="padding-top:5px">
+                            @role.IdentityRole.Name
+                        </span>
+                        <span style="padding-top:5px">
+                            <i class="material-icons right">expand_more</i>
+                        </span>
+                        <div class="col s1 m1 xl1 l1 right" style="padding: 0 0 0 0">
+                            <a asp-action="Alterar" asp-route-id="@role.IdentityRole.Id" title="Editar" class="btn blue lighten-2 waves-effect right" style="max-height:36px; max-width:52px; padding:0px 0px 0px 10px;">
+                                <i class="material-icons center">edit</i>
+                            </a>
+                        </div>
+                    </div>
+                    @foreach (var claim in role.RoleClaims)
+                    {
+                        <div class="collapsible-body">
+                            <span class="col l4 xl4 m4 s4">@claim.Type</span>
+                            <span class="center">@claim.Value</span>
+                            <a asp-action="Remove" asp-route-id="@claim.Type/@claim.Type" title="Excluir" class="btn red lighten-2 waves-effect right" style="max-height:36px; max-width:52px;">
+                                <i class="material-icons">clear</i>
+                            </a>
+                        </div>
+                    }
+                </li>
+            }
+        }
+    </ul>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var elems = document.querySelectorAll('.collapsible');
+        var options =
+        {
+            inDuration: 100,
+            outDuration: 100
+        };
+        M.Collapsible.init(elems, options);
+    });
+</script>

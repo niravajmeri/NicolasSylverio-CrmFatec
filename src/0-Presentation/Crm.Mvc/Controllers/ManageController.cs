@@ -1,6 +1,5 @@
 ﻿using Crm.Application.ViewModels.ManageViewModels;
-using Crm.Domain.Interfaces.Services;
-using Crm.Infra.CrossCutting.Identity.Models;
+using Crm.Domain.Models.Permission;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -15,23 +14,20 @@ namespace Crm.Mvc.Controllers
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
-        private readonly IEmailService _emailSender;
         private readonly ILogger _logger;
 
         public ManageController(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
-            IEmailService emailSender,
             ILogger logger)
         {
             _userManager = userManager;
             _signInManager = signInManager;
-            _emailSender = emailSender;
             _logger = logger;
         }
 
         [TempData]
-        public string StatusMessage { get; set; }
+        private string StatusMessage { get; set; }
 
         [HttpGet]
         [Route("account-management")]

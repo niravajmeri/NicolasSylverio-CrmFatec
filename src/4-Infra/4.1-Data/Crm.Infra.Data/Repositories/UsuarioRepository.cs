@@ -9,7 +9,7 @@ namespace Crm.Infra.Data.Repositories
 {
     public class UsuarioRepository : IUsuarioRepository
     {
-        protected readonly CrmContext Db;
+        private readonly CrmContext Db;
 
         public UsuarioRepository(CrmContext context)
         {

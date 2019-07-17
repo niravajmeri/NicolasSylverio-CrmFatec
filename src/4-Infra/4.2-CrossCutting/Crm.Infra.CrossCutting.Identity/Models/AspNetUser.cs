@@ -1,7 +1,7 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Crm.Infra.CrossCutting.Identity.Interfaces;
+using Microsoft.AspNetCore.Http;
 using System.Collections.Generic;
 using System.Security.Claims;
-using Crm.Infra.CrossCutting.Identity.Interfaces;
 
 namespace Crm.Infra.CrossCutting.Identity.Models
 {

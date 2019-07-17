@@ -1,4 +1,5 @@
-﻿using Crm.Infra.CrossCutting.Identity.Models;
+﻿using Crm.Domain.Models.Permission;
+using Crm.Infra.CrossCutting.Identity.Models;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -19,6 +20,8 @@ namespace Crm.Infra.CrossCutting.Identity.Data
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
+
+
             // get the configuration from the app settings
             var config = new ConfigurationBuilder()
                 .SetBasePath(_env.ContentRootPath)

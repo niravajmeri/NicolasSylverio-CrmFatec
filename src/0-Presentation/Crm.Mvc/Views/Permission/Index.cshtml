@@ -1,0 +1,106 @@
+﻿@model Crm.Application.ViewModels.PermissionViewModels.ConsultaUsuarioViewModel
+
+@{
+    ViewData["Title"] = "Permissões";
+}
+
+<div class="container">
+    <h3>@ViewData["Title"]</h3>
+
+    <br />
+
+    <div class="row">
+        <form class="col s12">
+            <div class="row">
+                <div class="input-field col s6 m6 l2 xl2 left">
+                    <p>
+                        <label>
+                            <input class="with-gap" value="0" name="nome" type="radio" checked />
+                            <span>Nome</span>
+                        </label>
+                    </p>
+                </div>
+                <div class="input-field col s6 m6 l2 xl2 left">
+                    <p>
+                        <label>
+                            <input class="with-gap" value="1" name="email" type="radio" />
+                            <span>E-mail</span>
+                        </label>
+                    </p>
+                </div>
+                <div class="input-field col s12 m12 l6 xl6">
+                    <i class="material-icons prefix">search</i>
+                    <textarea id="icon_prefix2" class="materialize-textarea"></textarea>
+                    <label for="icon_prefix2">Consulta Usuário</label>
+                </div>
+                <div class="input-field col s12 m12 l2 xl2 center">
+                    <button class="btn ">Consulta</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <table class="table responsive-table highlight">
+        <thead>
+            <tr>
+                <th>
+                    Nome
+                </th>
+                <th>
+                    E-mail
+                </th>
+                <th>
+                    Ativo?
+                </th>
+                <th>
+                    E-mail Ativo?
+                </th>
+                <th>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null)
+            {
+                @foreach (var item in Model.ListaUsuarios)
+                {
+                    <tr>
+                        <td>@item.UserName</td>
+                        <td>@item.Email</td>
+                        <td>@(item.EmailConfirmed ? "Ativo" : "Inativo")</td>
+                        <td>@(item.EmailConfirmed ? "Ativo" : "Inativo")</td>
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@item.Id" title="Editar" class="btn yellow lighten-2 waves-effect">
+                                <i class="material-icons">edit</i>
+                            </a>
+
+                            <a asp-action="Details" asp-route-id="@item.Id" title="Detalhes" class="btn blue lighten-2 waves-effect">
+                                <i class="material-icons">details</i>
+                            </a>
+
+                            <a asp-action="Delete" asp-route-id="@item.Id" title="Deletar" class="btn red lighten-2 waves-effect">
+                                <i class="material-icons">delete</i>
+                            </a>
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+
+    <br />
+
+    <div class="row">
+        <div class="col s12 m12 l12 xl12 right-align">
+            <ul class="pagination">
+                <li class="disabled"><a href="#"><i class="material-icons">chevron_left</i></a></li>
+                <li class="active"><a href="#">1</a></li>
+                <li class="waves-effect"><a href="#">2</a></li>
+                <li class="waves-effect"><a href="#">3</a></li>
+                <li class="waves-effect"><a href="#">4</a></li>
+                <li class="waves-effect"><a href="#">5</a></li>
+                <li class="waves-effect"><a href="#"><i class="material-icons">chevron_right</i></a></li>
+            </ul>
+        </div>
+    </div>
+</div>

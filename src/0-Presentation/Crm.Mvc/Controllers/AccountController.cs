@@ -1,4 +1,5 @@
 ﻿using Crm.Application.ViewModels.AccountViewModels;
+using Crm.Domain.Enum;
 using Crm.Domain.Interfaces.Services;
 using Crm.Infra.CrossCutting.Identity.Extensions;
 using Crm.Infra.CrossCutting.Identity.Models;
@@ -10,6 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using Crm.Domain.Models.Permission;
 
 namespace Crm.Mvc.Controllers
 {
@@ -18,16 +20,21 @@ namespace Crm.Mvc.Controllers
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
         private readonly IEmailService _emailSender;
 
-        public AccountController(
+        public AccountController
+        (
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
-            IEmailService emailSender)
+            RoleManager<IdentityRole> roleManager,
+            IEmailService emailSender
+        )
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _emailSender = emailSender;
+            _roleManager = roleManager;
         }
 
         [TempData]
@@ -143,7 +150,7 @@ namespace Crm.Mvc.Controllers
             await _signInManager.SignOutAsync();
 
             return RedirectToAction(nameof(HomeController.Index), "Home");
-        } 
+        }
 
         [HttpGet]
         [Route("account/register")]
@@ -170,7 +177,22 @@ namespace Crm.Mvc.Controllers
 
             if (result.Succeeded)
             {
-                await _userManager.AddClaimAsync(user, new Claim("Usuario", "Write"));
+                var adminRole = await _roleManager.FindByNameAsync("User");
+
+                if (adminRole == null)
+                {
+                    adminRole = new IdentityRole("User");
+                    await _roleManager.CreateAsync(adminRole);
+
+                    await _roleManager.AddClaimAsync(adminRole, new Claim(CustomClaimTypes.Menu, "Home"));
+                    await _roleManager.AddClaimAsync(adminRole, new Claim(CustomClaimTypes.Menu, "Privacy"));
+                    await _roleManager.AddClaimAsync(adminRole, new Claim(CustomClaimTypes.Menu, "Configuration"));
+                }
+
+                if (!await _userManager.IsInRoleAsync(user, adminRole.Name))
+                {
+                    await _userManager.AddToRoleAsync(user, adminRole.Name);
+                }
 
                 var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                 var callbackUrl = Url.EmailConfirmationLink(user.Id, code, Request.Scheme);
