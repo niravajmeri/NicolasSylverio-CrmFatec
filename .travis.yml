@@ -5,7 +5,10 @@ dist: xenial
 dotnet: 2.2
 
 install:
+  - dotnet tool install -g coveralls.net --version 1.0.0
   - dotnet restore
 
 script:
   - dotnet build
+  - dotnet test src/5-Tests/Crm.Test/Crm.Test.csproj -p:CollectCoverage=true -p:CoverletOutputFormat=opencover -p:CoverletOutput=".coverage/coverage.opencover.xml"
+  - $HOME/.dotnet/tools/csmacnz.Coveralls -i src/5-Tests/Crm.Test/.coverage/coverage.opencover.xml --opencover --repoToken $COVERALLS_REPO_TOKEN --jobId $TRAVIS_JOB_ID --serviceName "travis-ci" --useRelativePaths
