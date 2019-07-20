@@ -21,7 +21,6 @@ namespace Crm.Infra.IoC
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
             // Application
-            services.AddAutoMapper();
             services.AddScoped<IUsuarioAppService, UsuarioAppService>();
             services.AddScoped<IPermissionAppService, PermissionAppService>();
 

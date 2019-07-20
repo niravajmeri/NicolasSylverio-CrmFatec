@@ -1,6 +1,6 @@
 ﻿using AutoFixture;
 using AutoMapper;
-using Crm.Application.Interface;
+using Crm.Application.Services;
 using Crm.Application.ViewModels.PermissionViewModels;
 using Crm.Domain.Enum;
 using Crm.Domain.Interfaces.Services;
@@ -17,22 +17,18 @@ namespace Crm.Test
 {
     public class PermissionAppServiceTest
     {
-        private readonly IPermissionAppService _permissionAppServiceMock;
+        private readonly PermissionAppService _permissionAppServiceMock;
         private readonly IPermissionService _permissionServiceMock;
-        private readonly IIdentityRepository _identityRepositoryMock;
+        private readonly Mock<IIdentityRepository> _identityRepositoryMock;
         private readonly IMapper _mapperMock;
 
         private Role _role;
-        private IEnumerable<Role> _roleList;
-        private IEnumerable<RoleViewModel> _roleViewModel;
 
         private readonly Fixture _fixture;
 
         public PermissionAppServiceTest()
         {
             _fixture = new Fixture();
-
-            var permissionAppServiceMock = new Mock<IPermissionAppService>();
 
             var mapperMock = new Mock<IMapper>();
             _mapperMock = mapperMock.Object;
@@ -53,9 +49,18 @@ namespace Crm.Test
                 .Setup(x => x.GetAllRoles())
                 .Returns(ConfigureIdentityRole());
 
-            _identityRepositoryMock = identityRepositoryMock.Object;
+            identityRepositoryMock
+                .Setup(x => x.GetAllUsers())
+                .Returns(new List<ApplicationUser>());
 
-            _permissionAppServiceMock = permissionAppServiceMock.Object;
+            _identityRepositoryMock = identityRepositoryMock;
+
+            _permissionAppServiceMock = new PermissionAppService
+                (
+                    identityRepositoryMock.Object,
+                    _permissionServiceMock,
+                    _mapperMock
+                );
         }
 
         private void ConfigureRoleList(IEnumerable<Role> roles = null)
@@ -71,7 +76,7 @@ namespace Crm.Test
                 };
             }
 
-            _roleViewModel = _mapperMock.Map<IEnumerable<RoleViewModel>>(roles);
+            //_roleViewModel = _mapperMock.Map<IEnumerable<RoleViewModel>>(roles);
         }
 
         private Role ConfigureRole()
@@ -95,17 +100,21 @@ namespace Crm.Test
         }
 
         [Fact]
-        public static void ConstructorTest()
-        {
-            Assert.NotNull(1);
-        }
-
-        [Fact]
         public void Deve_Retornar_Todas_As_Permissoes()
         {
             var roles = _permissionAppServiceMock.ListAllRoles();
 
-            Assert.Equal(new List<RoleViewModel>(), roles);
+            Assert.IsType<List<RoleViewModel>>(roles);
+            _identityRepositoryMock.Verify(x => x.GetAllRoles(), Times.Once);
+        }
+
+        [Fact]
+        public void Deve_Retornar_Todos_Os_Usuarios()
+        {
+            var users = _permissionAppServiceMock.ListAllUsers();
+
+            Assert.IsType<ConsultaUsuarioViewModel>(users);
+            _identityRepositoryMock.Verify(x => x.GetAllUsers(), Times.AtLeastOnce);
         }
     }
 }

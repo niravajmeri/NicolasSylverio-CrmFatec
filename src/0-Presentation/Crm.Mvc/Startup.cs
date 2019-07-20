@@ -1,8 +1,8 @@
-﻿using Crm.Domain.Enum;
+﻿using AutoMapper;
+using Crm.Domain.Enum;
 using Crm.Domain.Models.Permission;
 using Crm.Infra.CrossCutting.Identity.Authorization;
 using Crm.Infra.CrossCutting.Identity.Data;
-using Crm.Infra.CrossCutting.Identity.Models;
 using Crm.Infra.IoC;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
@@ -57,6 +57,8 @@ namespace Crm.Mvc
                     o.LoginPath = new PathString("/login");
                     o.AccessDeniedPath = new PathString("/home/access-denied");
                 });
+
+            services.AddAutoMapper();
 
             RegisterServices(services);
         }
