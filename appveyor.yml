@@ -1,21 +1,23 @@
 version: 1.0.{build}
-
 pull_requests:
   do_not_increment_build_number: true
-
 branches:
   only:
   - master
   - develop
-
 max_jobs: 1
-
-image: Visual Studio 2015
-
+image: Visual Studio 2017
+configuration: Release
 platform: Any CPU
-
+clone_folder: c:\projects\CrmFatec
+before_build:
+- cmd: dotnet clean -c Release && dotnet restore && dotnet build -c Release
 build:
+  project: Crm.sln
   publish_wap: true
   publish_aspnet_core: true
   verbosity: minimal
-
+test:
+  assemblies:
+    only: 
+    - src\5-Tests\Crm.Test.csproj
